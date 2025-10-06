@@ -2,16 +2,19 @@
 {% block content %}
 <div style="position:relative; width:100%;">
   <div style="text-align:center; margin-top:40px; margin-bottom:10px;">
+<<<<<<< HEAD
     <span style="font-family:'Poppins', Arial, sans-serif; font-size:2.5em; font-weight:bold; color:white; letter-spacing:1px;">Employee Management by <a href="https://www.github.com/umarsajid220" style="text-decoration: none; color: rgb(112, 62, 228); ">Umar Sajid</a></span>
+=======
+      <span style="font-family:'Poppins', Arial, sans-serif; font-size:2.5em; font-weight:700; color:#1a237e; letter-spacing:1px; text-shadow:0 2px 8px rgba(26,35,126,0.10);">A Square Skills Management</span>
+>>>>>>> ac96db27d2183db9d1af7a5517a3db12c94563e8
   </div>
 </div>
 <div class="dashboard-container" style="max-width:400px; margin-top:30px; background:#184d36;">
   <div style="text-align:center; margin-bottom:18px;">
-    <span style="display:inline-block; color:#fff; border-radius:8px; font-family:'Segoe UI', Arial, sans-serif; font-size:2.3em; font-weight:bold; padding:10px 30px;">
-      Login
-    </span>
+      <span style="display:inline-block; color:#b8c1ec; border-radius:8px; font-family:'Poppins', Arial, sans-serif; font-size:2.3em; font-weight:bold; padding:10px 30px; letter-spacing:1px; background:#1a237e;">Login</span>
   </div>
   {% if message %}
+<<<<<<< HEAD
     <p style="color:#222222; text-align:center; margin-bottom:18px;">{{ message }}</p>
   {% endif %}
   <form method="post" style="display:flex; flex-direction:column; gap:18px;">
@@ -20,10 +23,20 @@
     <input type="submit" value="Login"
       class="animated-btn"
       style="background:#082e57; color:#fff; border:none; border-radius:6px; width:100%; font-size:1.1em; cursor:pointer; padding:10px 0;">
+=======
+      <p style="color:#ffb300; text-align:center; margin-bottom:18px;">{{ message }}</p>
+  {% endif %}
+  <form method="post" style="display:flex; flex-direction:column; gap:18px;">
+      <input name="username" placeholder="Enter Username" required
+        style="padding:12px 14px; border-radius:6px; border:1px solid #232946; font-size:1.1em; background:#e0e3ea; margin-bottom:8px; color:#232946;">
+      <input type="submit" value="Login"
+        class="animated-btn"
+        style="background:#1a237e; color:#fff; border:none; border-radius:6px; width:100%; font-size:1.1em; cursor:pointer; padding:10px 0; letter-spacing:1px;">
+>>>>>>> ac96db27d2183db9d1af7a5517a3db12c94563e8
   </form>
   <div style="margin-top:22px; text-align:center; display: flex; flex-direction: column; gap: 12px; align-items: center;">
-    <a href="/signup" class="animated-btn" style="background:#007bff; color:#fff; border:none; border-radius:6px; padding:10px 18px; text-decoration:none; width: 80%; max-width: 260px;">Employee Sign Up</a>
-    <a href="/admin_signup" class="animated-btn" style="background:#d32f2f; color:#fff; border:none; border-radius:6px; padding:10px 18px; text-decoration:none; width: 80%; max-width: 260px; font-weight: bold;">Create New Admin</a>
+      <a href="/signup" class="animated-btn" style="background:#232946; color:#fff; border:none; border-radius:6px; padding:10px 18px; text-decoration:none; width: 80%; max-width: 260px; font-weight: bold;">Employee Sign Up</a>
+      <a href="/admin_signup" class="animated-btn" style="background:#1a237e; color:#fff; border:none; border-radius:6px; padding:10px 18px; text-decoration:none; width: 80%; max-width: 260px; font-weight: bold;">Create New Admin</a>
   </div>
 </div>
 <style>
@@ -36,15 +49,15 @@
     transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
   }
   .animated-btn:hover, .animated-btn:focus {
-    background: #0056b3;
+    background: #232946;
+    color: #b8c1ec;
     transform: translateY(-2px) scale(1.04);
-    box-shadow: 0 4px 16px rgba(0,123,255,0.18);
-    color: #fff;
+    box-shadow: 0 4px 16px rgba(26,35,126,0.18);
   }
   .animated-btn:active {
-    background: #339cff;
-    transform: scale(0.98);
+    background: #1a237e;
     color: #fff;
+    transform: scale(0.98);
   }
 </style>
 {% endblock %}
