@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="dashboard-container" style="max-width:420px; margin-top:80px;">
+  <h2 style="text-align:center;">Assign New Task</h2>
+  {% if message %}
+    <p style="color:#2563eb; text-align:center; margin-bottom:18px;">{{ message }}</p>
+  {% endif %}
+  <form method="post" style="display:flex; flex-direction:column; gap:18px;">
+    <input name="employee" placeholder="Employee Username" required
+      style="padding:12px 14px; border-radius:6px; border:1px solid #c7d2fe; font-size:1.1em; background:#f3f4f6; margin-bottom:8px;">
+    <input name="title" placeholder="Task Title" required
+      style="padding:12px 14px; border-radius:6px; border:1px solid #c7d2fe; font-size:1.1em; background:#f3f4f6; margin-bottom:8px;">
+    <textarea name="explanation" placeholder="Task Explanation" rows="3" required
+      style="padding:12px 14px; border-radius:6px; border:1px solid #c7d2fe; font-size:1.1em; background:#f3f4f6; margin-bottom:8px;"></textarea>
+    <select name="priority" required
+      style="padding:12px 14px; border-radius:6px; border:1px solid #c7d2fe; font-size:1.1em; background:#f3f4f6; margin-bottom:8px;">
+      <option value="">Select Priority</option>
+      <option value="High">High</option>
+      <option value="Medium">Medium</option>
+      <option value="Low">Low</option>
+    </select>
+    <input type="date" name="deadline" required
+      style="padding:12px 14px; border-radius:6px; border:1px solid #c7d2fe; font-size:1.1em; background:#f3f4f6; margin-bottom:8px;">
+    <input type="submit" value="Assign Task"
+      class="btn-blue"
+      style="width:100%; font-size:1.1em; cursor:pointer;">
+  </form>
+  <div style="margin-top:22px; text-align:center;">
+    <a href="/admin" class="btn-blue">Back to Dashboard</a>
+  </div>
+</div>
+{% endblock %}

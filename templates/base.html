@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}Dashboard{% endblock %}</title>
+  <style>
+    html, body {
+      min-height: 100vh;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #2e8b57; /* Sea green */
+    }
+    .dashboard-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 60px;
+      background: rgba(255,255,255,0.7);
+      padding: 40px 50px;
+      border-radius: 18px;
+      box-shadow: 0 8px 32px rgba(46,139,87,0.18);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(46,139,87,0.12);
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .nav-options {
+      position: absolute;
+      top: 30px;
+      right: 60px;
+      display: flex;
+      gap: 18px;
+      z-index: 10;
+    }
+    .nav-options a, .btn-blue {
+      padding: 10px 22px;
+      border-radius: 7px;
+      background: linear-gradient(90deg, #2563eb 0%, #6366f1 100%);
+      color: #fff !important;
+      border: 2px solid #fff;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(99,102,241,0.10);
+      display: inline-block;
+      letter-spacing: 0.5px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-options a::after, .btn-blue::after {
+      content: '';
+      position: absolute;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(255,255,255,0.08);
+      opacity: 0;
+      transition: opacity 0.2s;
+      border-radius: 7px;
+    }
+    .nav-options a:hover, .btn-blue:hover {
+      background: linear-gradient(90deg, #6366f1 0%, #2563eb 100%);
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 16px rgba(99,102,241,0.18);
+    }
+    .nav-options a:hover::after, .btn-blue:hover::after {
+      opacity: 1;
+    }
+    h2 {
+      margin-bottom: 24px;
+      font-size: 2.2rem;
+      color: #3730a3;
+      text-shadow: 0 2px 8px rgba(99,102,241,0.08);
+    }
+    h3 {
+      margin-top: 28px;
+      margin-bottom: 12px;
+      color: #4338ca;
+      font-size: 1.2rem;
+      letter-spacing: 0.5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 18px;
+      background: rgba(255,255,255,0.95);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 1px 4px rgba(99,102,241,0.06);
+    }
+    th, td {
+      padding: 10px 14px;
+      text-align: left;
+      border-bottom: 1px solid #e0e7ff;
+    }
+    th {
+      background: #6366f1;
+      color: #fff;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    .btn-seagreen {
+      padding: 10px 22px;
+      border-radius: 7px;
+      background: #2e8b57; /* Sea green */
+      color: #fff !important;
+      border: 2px solid #fff;
+      font-weight: 600;
+      text-decoration: none;
+      box-shadow: 0 2px 8px rgba(46,139,87,0.10);
+      display: inline-block;
+      letter-spacing: 0.5px;
+      transition: background 0.3s cubic-bezier(.4,0,.2,1), transform 0.2s, box-shadow 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-seagreen:hover, .btn-seagreen:focus {
+      background: #20b2aa; /* Light sea green */
+      color: #fff;
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 4px 16px rgba(32,178,170,0.18);
+    }
+    .btn-seagreen:active {
+      background: #3cb371; /* Medium sea green */
+      color: #fff;
+      transform: scale(0.98);
+    }
+    @media (max-width: 700px) {
+      .dashboard-container {
+        padding: 18px 8px;
+        max-width: 98vw;
+      }
+      .nav-options {
+        right: 10px;
+        top: 10px;
+        gap: 8px;
+      }
+      table th, table td {
+        padding: 6px 4px;
+        font-size: 0.95em;
+      }
+    }
+  </style>
+  <style>
+  @keyframes agent-bounce {
+    0% { transform: translateY(0) scale(1); }
+    60% { transform: translateY(-10px) scale(1.08); }
+    100% { transform: translateY(0) scale(1); }
+  }
+  .ai-agent-fab {
+    position: fixed;
+    right: 32px;
+    bottom: 32px;
+    z-index: 2000;
+  }
+  .ai-agent-fab img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    box-shadow: 0 4px 16px rgba(37,99,235,0.18);
+    background: #fff;
+    animation: agent-bounce 1.2s infinite alternate;
+    cursor: pointer;
+    border: 2px solid #2563eb;
+  }
+  </style>
+</head>
+<body>
+  {% block content %}
+  <div class="nav-options">
+    <a href="/assign_task" class="btn-blue">Assign New Task</a>
+    <a href="/logout" class="btn-blue">Logout</a>
+    <a href="/chat" class="btn-blue">Open AI Assistant 🤖</a>
+  </div>
+
+  <div class="dashboard-container">
+    <h2>Admin Dashboard</h2>
+
+    <h3>All Tasks</h3>
+    <table border="1" cellpadding="6">
+      <tr><th>ID</th><th>Employee</th><th>Title</th><th>Priority</th><th>Deadline</th><th>Status</th></tr>
+      {% for t in tasks %}
+      <tr>
+        <td>{{ t[0] }}</td>
+        <td>{{ t[1] }}</td>
+        <td>{{ t[2] }}</td>
+        <td>{{ t[4] }}</td>
+        <td>{{ t[5] }}</td>
+        <td>{{ t[6] }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+
+    <h3>Employee Login/Logout Activity</h3>
+    <table border="1" cellpadding="6">
+      <tr><th>Username</th><th>Login Time</th><th>Logout Time</th></tr>
+      {% for log in logs %}
+      <tr>
+        <td>{{ log[1] }}</td>
+        <td>{{ log[2] }}</td>
+        <td>{{ log[3] if log[3] else 'Active Session' }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% endblock %}
+</body>
+  <!-- Floating AI Agent Bot -->
+  <div class="ai-agent-fab" title="AI Assistant: Ask about this site or get help!">
+    <a href="/chat">
+      <img src="{{ url_for('static', filename='ai_agent.svg') }}" alt="AI Agent Bot">
+    </a>
+  </div>
+</html>

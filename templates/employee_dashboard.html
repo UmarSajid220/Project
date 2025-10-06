@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+  .dashboard-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+  .nav-options {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    display: flex;
+    gap: 10px;
+  }
+  .nav-options a, .btn-blue {
+    padding: 8px 18px;
+    border-radius: 5px;
+    background: #007bff;
+    color: #fff !important;
+    border: 2px solid #fff;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    display: inline-block;
+  }
+  .nav-options a:hover, .btn-blue:hover {
+    background: #0056b3;
+    color: #fff;
+  }
+  h2 {
+    margin-bottom: 20px;
+  }
+</style>
+
+<div class="nav-options">
+  <a href="/logout" class="btn-blue">Logout</a>
+  <a href="/chat" class="btn-blue">Open AI Assistant 🤖</a>
+</div>
+
+<div class="dashboard-container">
+  <h2>Welcome, {{ user }}</h2>
+
+  <h3>Your Tasks</h3>
+  {% if tasks %}
+  <table border="1" cellpadding="6">
+    <tr><th>Title</th><th>Explanation</th><th>Priority</th><th>Deadline</th><th>Status</th><th>Action</th></tr>
+    {% for t in tasks %}
+    <tr>
+      <td>{{ t[2] }}</td>
+      <td>{{ t[3] }}</td>
+      <td>{{ t[4] }}</td>
+      <td>{{ t[5] }}</td>
+      <td>{{ t[6] }}</td>
+      <td>
+        {% if t[6] != 'Completed' %}
+        <a href="/complete_task/{{ t[0] }}" class="btn-blue">Mark Complete</a>
+        {% else %}
+        ✅ Done
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No tasks assigned yet.</p>
+  {% endif %}
+
+  <h3>Login/Logout History</h3>
+  {% if logs %}
+  <table border="1" cellpadding="6">
+    <tr><th>Login Time</th><th>Logout Time</th></tr>
+    {% for log in logs %}
+    <tr>
+      <td>{{ log[0] }}</td>
+      <td>{{ log[1] if log[1] else 'Active Session' }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No login records found.</p>
+  {% endif %}
+</div>
+{% endblock %}

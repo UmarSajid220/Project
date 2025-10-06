@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Chatbot Assistant</title>
+    <style>
+        body { font-family: Arial; background: #f7f7f7; margin: 0; padding: 0; }
+        #chat-box { width: 80%; max-width: 700px; margin: 50px auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+        #messages { height: 400px; overflow-y: auto; border: 1px solid #ddd; padding: 10px; }
+        .user { text-align: right; color: blue; margin: 5px; }
+        .bot { text-align: left; color: green; margin: 5px; }
+        input, button { padding: 10px; width: 80%; margin-top: 10px; }
+        button { width: 18%; background: #333; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+        <div id="chat-box">
+                <h2 style="display:flex; align-items:center; gap:10px;">
+                    <img src="{{ url_for('static', filename='ai_agent.svg') }}" alt="AI Agent" style="width:38px; height:38px; vertical-align:middle; animation: agent-bounce 1.2s infinite alternate;"> 
+                    AI Assistant
+                </h2>
+                <div id="messages"></div>
+                <input type="text" id="user-input" placeholder="Ask something..." />
+                <button onclick="sendMessage()">Send</button>
+        </div>
+
+        <!-- Floating AI Agent Button -->
+        <div id="ai-agent-fab" style="position:fixed; right:32px; bottom:32px; z-index:1000;">
+            <img src="{{ url_for('static', filename='ai_agent.svg') }}" alt="AI Agent" style="width:60px; height:60px; border-radius:50%; box-shadow:0 4px 16px rgba(37,99,235,0.18); background:#fff; animation: agent-bounce 1.2s infinite alternate; cursor:pointer;" onclick="scrollToChat()">
+        </div>
+
+        <style>
+        @keyframes agent-bounce {
+            0% { transform: translateY(0) scale(1); }
+            60% { transform: translateY(-10px) scale(1.08); }
+            100% { transform: translateY(0) scale(1); }
+        }
+        </style>
+        <script>
+        function scrollToChat() {
+            document.getElementById('chat-box').scrollIntoView({behavior: 'smooth'});
+        }
+    async function sendMessage() {
+            const input = document.getElementById("user-input");
+            const message = input.value.trim();
+            if (!message) return;
+
+            const messagesDiv = document.getElementById("messages");
+            messagesDiv.innerHTML += `<div class="user"><b>You:</b> ${message}</div>`;
+            input.value = "";
+
+            const response = await fetch("/chatbot", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ message })
+            });
+
+            const data = await response.json();
+            messagesDiv.innerHTML += `<div class="bot"><b>Bot:</b> ${data.response}</div>`;
+            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+        }
+    </script>
+</body>
+</html>

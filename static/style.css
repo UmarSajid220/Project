@@ -1,0 +1,41 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background: #181c24; /* Much darker background */
+  color: #e0e0e0;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  width: 80%;
+  margin: 40px auto;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  padding: 30px;
+}
+
+h2 {
+  color: #007bff;
+}
+
+input, select {
+  padding: 8px;
+  margin: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button, input[type="submit"] {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+a {
+  color: #007bff;
+  text-decoration: none;
+}
